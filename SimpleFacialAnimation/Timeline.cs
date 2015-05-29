@@ -8,13 +8,12 @@ namespace SimpleFacialAnimation
 {
     class Timeline
     {
-        Timeline()
+        public Timeline(Dictionary<string, Expression> expressions)
         {
-            Expressions = new Dictionary<string, Expression>();
+            Expressions = expressions;
         }
 
         public Dictionary<string, Expression> Expressions { get; private set; }
-
         public List<Movement> Movements { get; private set; }
 
         public void addMovement(Movement movement)
