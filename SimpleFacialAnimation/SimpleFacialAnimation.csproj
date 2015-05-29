@@ -68,7 +68,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Expression.cs" />
     <Compile Include="FacialAnimationCommander.cs" />
+    <Compile Include="Movement.cs" />
+    <Compile Include="SFAParsingException.cs" />
     <Compile Include="SimpleFacialAnimationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +84,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Timeline.cs" />
+    <Compile Include="TimelineParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SimpleFacialAnimationForm.resx">
