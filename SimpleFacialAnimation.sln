@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFacialAnimation", "SimpleFacialAnimation\SimpleFacialAnimation.csproj", "{1A4EA894-C54D-44D2-8A9A-1933B320AF7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormTest", "FormTest\FormTest.csproj", "{D734A3A7-A9F9-4075-BFF7-84494A07C545}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A4EA894-C54D-44D2-8A9A-1933B320AF7A} = {1A4EA894-C54D-44D2-8A9A-1933B320AF7A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{1A4EA894-C54D-44D2-8A9A-1933B320AF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A4EA894-C54D-44D2-8A9A-1933B320AF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A4EA894-C54D-44D2-8A9A-1933B320AF7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D734A3A7-A9F9-4075-BFF7-84494A07C545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D734A3A7-A9F9-4075-BFF7-84494A07C545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D734A3A7-A9F9-4075-BFF7-84494A07C545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D734A3A7-A9F9-4075-BFF7-84494A07C545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

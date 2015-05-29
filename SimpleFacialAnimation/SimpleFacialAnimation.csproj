@@ -31,27 +31,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AssemblyLoader">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\AssemblyLoader.dll</HintPath>
+      <HintPath>..\lib\AssemblyLoader.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.Max">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\Autodesk.Max.dll</HintPath>
+      <HintPath>..\lib\Autodesk.Max.dll</HintPath>
     </Reference>
     <Reference Include="CSharpUtilities">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\CSharpUtilities.dll</HintPath>
+      <HintPath>..\lib\CSharpUtilities.dll</HintPath>
     </Reference>
     <Reference Include="ExplorerFramework">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\ExplorerFramework.dll</HintPath>
+      <HintPath>..\lib\ExplorerFramework.dll</HintPath>
     </Reference>
     <Reference Include="ManagedServices">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\ManagedServices.dll</HintPath>
+      <HintPath>..\lib\ManagedServices.dll</HintPath>
     </Reference>
     <Reference Include="MaxCustomControls">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\MaxCustomControls.dll</HintPath>
+      <HintPath>..\lib\MaxCustomControls.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SceneExplorer">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\SceneExplorer.dll</HintPath>
+      <HintPath>..\lib\SceneExplorer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,7 +63,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UiViewModels">
-      <HintPath>D:\Program Files\Autodesk\3ds Max 2014\UiViewModels.dll</HintPath>
+      <HintPath>..\lib\UiViewModels.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -90,6 +90,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="imgs\20\load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\20\load_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\20\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\20\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\20\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\20\load_3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

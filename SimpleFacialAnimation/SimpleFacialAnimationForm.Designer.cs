@@ -29,80 +29,127 @@
         private void InitializeComponent()
         {
             this.xmlTextBox = new System.Windows.Forms.RichTextBox();
-            this.comileBtn = new System.Windows.Forms.Button();
-            this.runBtn = new System.Windows.Forms.Button();
-            this.saveBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.loadBtn = new System.Windows.Forms.ToolStripButton();
+            this.saveBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.compileBtn = new System.Windows.Forms.ToolStripButton();
+            this.playBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // xmlTextBox
             // 
-            this.xmlTextBox.Location = new System.Drawing.Point(12, 12);
+            this.xmlTextBox.Location = new System.Drawing.Point(0, 28);
             this.xmlTextBox.Name = "xmlTextBox";
-            this.xmlTextBox.Size = new System.Drawing.Size(402, 503);
+            this.xmlTextBox.Size = new System.Drawing.Size(402, 474);
             this.xmlTextBox.TabIndex = 0;
+            this.xmlTextBox.TabStop = false;
             this.xmlTextBox.Text = "";
             // 
-            // comileBtn
+            // toolStrip1
             // 
-            this.comileBtn.Location = new System.Drawing.Point(420, 12);
-            this.comileBtn.Name = "comileBtn";
-            this.comileBtn.Size = new System.Drawing.Size(75, 23);
-            this.comileBtn.TabIndex = 1;
-            this.comileBtn.Text = "Запустить";
-            this.comileBtn.UseVisualStyleBackColor = true;
-            this.comileBtn.Click += new System.EventHandler(this.comileBtn_Click);
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadBtn,
+            this.saveBtn});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(440, 27);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // runBtn
+            // loadBtn
             // 
-            this.runBtn.Location = new System.Drawing.Point(420, 41);
-            this.runBtn.Name = "runBtn";
-            this.runBtn.Size = new System.Drawing.Size(75, 23);
-            this.runBtn.TabIndex = 2;
-            this.runBtn.Text = "Play";
-            this.runBtn.UseVisualStyleBackColor = true;
+            this.loadBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.loadBtn.Image = global::SimpleFacialAnimation.Properties.Resources.load_2;
+            this.loadBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.loadBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.loadBtn.Name = "loadBtn";
+            this.loadBtn.Size = new System.Drawing.Size(24, 24);
+            this.loadBtn.ToolTipText = "Загрузить";
+            this.loadBtn.Click += new System.EventHandler(this.loadBtn_Click);
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(420, 70);
+            this.saveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveBtn.Image = global::SimpleFacialAnimation.Properties.Resources.save;
+            this.saveBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveBtn.TabIndex = 3;
-            this.saveBtn.Text = "Сохранить";
-            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Size = new System.Drawing.Size(24, 24);
+            this.saveBtn.ToolTipText = "Сохранить";
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
-            // button1
+            // toolStrip2
             // 
-            this.button1.Location = new System.Drawing.Point(420, 99);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Загрузить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.toolStrip2.AutoSize = false;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.compileBtn,
+            this.playBtn});
+            this.toolStrip2.Location = new System.Drawing.Point(404, 27);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(36, 476);
+            this.toolStrip2.TabIndex = 4;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // compileBtn
+            // 
+            this.compileBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.compileBtn.Image = global::SimpleFacialAnimation.Properties.Resources.reload;
+            this.compileBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.compileBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.compileBtn.Name = "compileBtn";
+            this.compileBtn.Size = new System.Drawing.Size(34, 24);
+            this.compileBtn.ToolTipText = "Обработать скрипт";
+            this.compileBtn.Click += new System.EventHandler(this.compileBtn_Click);
+            // 
+            // playBtn
+            // 
+            this.playBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.playBtn.Image = global::SimpleFacialAnimation.Properties.Resources.play;
+            this.playBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.playBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.playBtn.Name = "playBtn";
+            this.playBtn.Size = new System.Drawing.Size(34, 24);
+            this.playBtn.ToolTipText = "Проиграть анимацию";
             // 
             // SimpleFacialAnimationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 527);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.runBtn);
-            this.Controls.Add(this.comileBtn);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClientSize = new System.Drawing.Size(440, 503);
+            this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.xmlTextBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SimpleFacialAnimationForm";
             this.Text = "Simple Facial Animation";
-            this.Load += new System.EventHandler(this.PluginForm_Load);
+            this.Load += new System.EventHandler(this.SimpleFacialAnimationForm_Load);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.RichTextBox xmlTextBox;
-        private System.Windows.Forms.Button comileBtn;
-        private System.Windows.Forms.Button runBtn;
-        private System.Windows.Forms.Button saveBtn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton saveBtn;
+        private System.Windows.Forms.ToolStripButton loadBtn;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton compileBtn;
+        private System.Windows.Forms.ToolStripButton playBtn;
     }
 }
