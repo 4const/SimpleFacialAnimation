@@ -10,7 +10,7 @@ namespace SimpleFacialAnimation
         }
 
         public Dictionary<string, Expression> Expressions { get; private set; }
-        public List<Movement> Movements { get; private set; }
+        public IEnumerable<Movement> Movements { get; private set; }
 
         public void AddMovement(Movement movement)
         {

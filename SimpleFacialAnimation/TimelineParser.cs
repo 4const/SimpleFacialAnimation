@@ -46,19 +46,21 @@ namespace SimpleFacialAnimation
         private static Expression ParseExpression(XElement expressionNode)
         {
             var id = expressionNode.Attribute("id").Value;
-
             var movements = ParseMovements(expressionNode.Elements("mov"));
 
-            return null;
+            return new Expression(id, movements);
         }
 
-        private static List<Movement> ParseMovements(IEnumerable<XElement> movementNodes)
+        private static IEnumerable<Movement> ParseMovements(IEnumerable<XElement> movementNodes)
         {
-            var list = new List<Movement>();
-            
+            var list = new List<Movement>();          
             foreach (var movement in movementNodes.Select(ParseMovement))
             {
-                
+                if (HasIntersection(list, movement))
+                {
+                    throw new SfaParsingException("Пересечение интервалов перемещения объекта: " + movement.ObjectId);
+                }
+                list.Add(movement);
             }
 
             return list;
@@ -74,7 +76,7 @@ namespace SimpleFacialAnimation
             return new Movement(id, start, end, value);
         }
 
-        private bool HasIntersection(IEnumerable<Movement> movements, Movement movement)
+        private static bool HasIntersection(IEnumerable<Movement> movements, Movement movement)
         {
             Predicate<Movement> hasSame = m => m.ObjectId == movement.ObjectId &&
                 (m.Start >= movement.Start && movement.Start < m.End ||
