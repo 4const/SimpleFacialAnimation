@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace SimpleFacialAnimation
 {
-    class TimelineParser
+    abstract class TimelineParser
     {
         public static Timeline Parse(string text)
         {            
@@ -17,26 +15,30 @@ namespace SimpleFacialAnimation
 
             if (mainNode == null)
             {
-                throw new SfaParsingException("Не найден тег <main>");
+                throw new SfaException("Не найден тег <main>");
             }
 
             var expressions = ParseExpressions(expressionNodes);
             var timeline = new Timeline(expressions);
 
+            var movements = ParseMovements(mainNode.Elements("mov"));
+            var expressionUsages = ParseExpressionUsages(mainNode.Elements("use"));
+
+            movements.ToList().ForEach(timeline.AddMovement);
+            expressionUsages.ToList().ForEach(timeline.AddExpressionUsage);
+            
             return timeline;
         }
 
         private static Dictionary<string, Expression> ParseExpressions(IEnumerable<XElement> expressionNodes)
         {
-            var map = new Dictionary<string, Expression>();
-            
+            var map = new Dictionary<string, Expression>();          
             foreach (var expression in expressionNodes.Select(ParseExpression))
             {
                 if (map.ContainsKey(expression.Id))
                 {
-                    throw new SfaParsingException("Несколько тегов expr с id = " + expression.Id);
+                    throw new SfaException("Несколько тегов expr с id = " + expression.Id);
                 }
-
                 map.Add(expression.Id, expression);
             }
 
@@ -56,9 +58,9 @@ namespace SimpleFacialAnimation
             var list = new List<Movement>();          
             foreach (var movement in movementNodes.Select(ParseMovement))
             {
-                if (HasIntersection(list, movement))
+                if (TimelineUtils.HasIntersection(list, movement))
                 {
-                    throw new SfaParsingException("Пересечение интервалов перемещения объекта: " + movement.ObjectId);
+                    throw new SfaException("Пересечение интервалов перемещения объекта: " + movement.ObjectId);
                 }
                 list.Add(movement);
             }
@@ -76,13 +78,11 @@ namespace SimpleFacialAnimation
             return new Movement(id, start, end, value);
         }
 
-        private static bool HasIntersection(IEnumerable<Movement> movements, Movement movement)
+        private static IEnumerable<ExpressionUsage> ParseExpressionUsages(IEnumerable<XElement> usagesNodes)
         {
-            Predicate<Movement> hasSame = m => m.ObjectId == movement.ObjectId &&
-                (m.Start >= movement.Start && movement.Start < m.End ||
-                m.Start > movement.End && movement.End <= m.End);
-                
-            return Contract.Exists(movements, hasSame);
+            return usagesNodes.Select(n => new ExpressionUsage(
+                n.Attribute("expr").Value, 
+                int.Parse(n.Attribute("start").Value)));
         }
     }
 }
