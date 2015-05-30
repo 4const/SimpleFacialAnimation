@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autodesk.Max;
-using UiViewModels.Actions;
+﻿using UiViewModels.Actions;
 
 namespace SimpleFacialAnimation
 {
@@ -23,7 +17,7 @@ namespace SimpleFacialAnimation
         public override void Execute(object parameter)
         {
             var dlg = new SimpleFacialAnimationForm();
-            dlg.ShowDialog();
+            dlg.Show();
         }
 
         public override string InternalActionText

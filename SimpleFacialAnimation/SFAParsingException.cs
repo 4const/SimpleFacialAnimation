@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleFacialAnimation
 {
-    class SFAParsingException : Exception
+    class SfaParsingException : Exception
     {
-        public SFAParsingException(string text) : base(text) { }
+        public SfaParsingException(string text) : base(text) { }
 
-        public SFAParsingException(string text, Exception cause) : base(text, cause) { }
+        public SfaParsingException(string text, Exception cause) : base(text, cause) { }
     }
 }

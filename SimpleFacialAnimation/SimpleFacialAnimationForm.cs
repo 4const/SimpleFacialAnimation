@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaxCustomControls;
 
 namespace SimpleFacialAnimation
 {
-    public partial class SimpleFacialAnimationForm : MaxCustomControls.MaxForm
+    public partial class SimpleFacialAnimationForm : MaxForm
     {
         public SimpleFacialAnimationForm()
         {
@@ -29,12 +25,14 @@ namespace SimpleFacialAnimation
 
         private void loadBtn_Click(object sender, EventArgs e)
         {
-            var dlg = new OpenFileDialog();
-            dlg.Filter = "Simple Facial Animation File|*.sfa";
-            dlg.Title = "Open  File";
+            var dlg = new OpenFileDialog
+            {
+                Filter = "Simple Facial Animation File|*.sfa",
+                Title = "Open  File"
+            };
             dlg.ShowDialog();
 
-            using (var reader = new System.IO.StreamReader(dlg.OpenFile(), System.Text.Encoding.UTF8))
+            using (var reader = new StreamReader(dlg.OpenFile(), Encoding.UTF8))
             {
                 xmlTextBox.Text = reader.ReadToEnd();                
             }
@@ -42,12 +40,14 @@ namespace SimpleFacialAnimation
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            var dlg = new SaveFileDialog();
-            dlg.Filter = "Simple Facial Animation File|*.sfa";
-            dlg.Title = "Save File";
+            var dlg = new SaveFileDialog
+            {
+                Filter = "Simple Facial Animation File|*.sfa",
+                Title = "Save File"
+            };
             dlg.ShowDialog();
 
-            using (var writer = new System.IO.StreamWriter(dlg.OpenFile(), System.Text.Encoding.UTF8))
+            using (var writer = new StreamWriter(dlg.OpenFile(), Encoding.UTF8))
             {
                 writer.WriteLine(xmlTextBox.Text);
             }
