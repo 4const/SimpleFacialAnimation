@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -54,9 +56,9 @@ namespace SimpleFacialAnimation
         {
             var list = new List<Movement>();
             
-            foreach (var node in movementNodes)
+            foreach (var movement in movementNodes.Select(ParseMovement))
             {
-                var movement = ParseMovement(node);
+                
             }
 
             return list;
@@ -70,6 +72,15 @@ namespace SimpleFacialAnimation
             var value = float.Parse(movementNode.Attribute("value").Value);
 
             return new Movement(id, start, end, value);
+        }
+
+        private bool HasIntersection(IEnumerable<Movement> movements, Movement movement)
+        {
+            Predicate<Movement> hasSame = m => m.ObjectId == movement.ObjectId &&
+                (m.Start >= movement.Start && movement.Start < m.End ||
+                m.Start > movement.End && movement.End <= m.End);
+                
+            return Contract.Exists(movements, hasSame);
         }
     }
 }
