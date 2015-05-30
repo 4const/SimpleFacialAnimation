@@ -1,0 +1,13 @@
+<sfa>
+<expr id="open_mouth">
+        <mov id="t_lip" value="70" start="0" end="25" />
+        <mov id="b_lip" value="70" start="0" end="25" />
+        <mov id="jaw" value="50" start="25" end="50" />
+</expr>
+
+<main>
+	<mov id="l_eyebrow" value="100" start="0" end="25" />
+	<mov id="r_eyebrow" value="100" start="0" end="25" />
+	<use expr="open_mouth" start="100" />
+</main>
+</sfa>

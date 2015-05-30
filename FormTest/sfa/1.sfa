@@ -1,8 +1,10 @@
+ï»¿<sfa>
 <main>
-	<mov id="l_eyebrow" value=“100” start=0 end=25 />
-	<mov id="r_eyebrow" value=“100” start=0 end=25 />
-	<mov id="rt_eyelid" value=“100” start=25 end=50 />
-	<mov id="rb_eyelid" value=“100” start=25 end=50 />
-	<mov id="lt_eyelid" value=“100” start=25 end=50 />
-	<mov id="lb_eyelid" value=“100” start=25 end=50 />
+	<mov id="l_eyebrow" value="100" start="0" end="25" />
+	<mov id="r_eyebrow" value="100" start="25" end="25" />
+	<mov id="rt_eyelid" value="100" start="25" end="50" />
+	<mov id="rb_eyelid" value="100" start="25" end="50" />
+	<mov id="lt_eyelid" value="100" start="25" end="50" />
+	<mov id="lb_eyelid" value="100" start="25" end="50" />
 </main>
+</sfa>

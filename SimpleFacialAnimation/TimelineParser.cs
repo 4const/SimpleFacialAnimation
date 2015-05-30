@@ -75,6 +75,11 @@ namespace SimpleFacialAnimation
             var end = int.Parse(movementNode.Attribute("end").Value);
             var value = float.Parse(movementNode.Attribute("value").Value);
 
+            if (start >= end)
+            {
+                throw new SfaException("У перемещения: " + id + " момент начала позже чем момент окончания.");
+            }
+
             return new Movement(id, start, end, value);
         }
 
