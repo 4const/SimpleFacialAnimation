@@ -4,9 +4,11 @@ namespace SimpleFacialAnimation
 {
     public class FacialAnimationCommander : CuiActionCommandAdapter
     {
+       private SimpleFacialAnimationForm dlg = new SimpleFacialAnimationForm();
+
         public override string ActionText
         {
-            get { return "Simple Facial Animation"; }
+            get { return "SFA"; }
         }
 
         public override string Category
@@ -16,7 +18,6 @@ namespace SimpleFacialAnimation
 
         public override void Execute(object parameter)
         {
-            var dlg = new SimpleFacialAnimationForm();
             dlg.Show();
         }
 

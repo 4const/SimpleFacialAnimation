@@ -53,5 +53,20 @@ namespace SimpleFacialAnimation
                 writer.WriteLine(xmlTextBox.Text);
             }
         }
+
+        private void playBtn_Click(object sender, EventArgs e)
+        {
+            TimelineUtils.PlayAnimation();
+        }
+
+        private void resetBtn_Click(object sender, EventArgs e)
+        {
+            TimelineUtils.ResetModel();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            TimelineUtils.TestFuck();
+        }
     }
 }

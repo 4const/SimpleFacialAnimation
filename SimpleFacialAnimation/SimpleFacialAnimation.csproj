@@ -30,28 +30,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AssemblyLoader">
-      <HintPath>..\lib\AssemblyLoader.dll</HintPath>
+    <Reference Include="AssemblyLoader, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib_2015\AssemblyLoader.dll</HintPath>
     </Reference>
-    <Reference Include="Autodesk.Max">
-      <HintPath>..\lib\Autodesk.Max.dll</HintPath>
+    <Reference Include="Autodesk.Max, Version=16.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib_2015\Autodesk.Max.dll</HintPath>
     </Reference>
-    <Reference Include="CSharpUtilities">
-      <HintPath>..\lib\CSharpUtilities.dll</HintPath>
+    <Reference Include="CSharpUtilities, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib_2015\CSharpUtilities.dll</HintPath>
     </Reference>
-    <Reference Include="ExplorerFramework">
-      <HintPath>..\lib\ExplorerFramework.dll</HintPath>
+    <Reference Include="ExplorerFramework, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib_2015\ExplorerFramework.dll</HintPath>
     </Reference>
-    <Reference Include="ManagedServices">
-      <HintPath>..\lib\ManagedServices.dll</HintPath>
+    <Reference Include="ManagedServices, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib_2015\ManagedServices.dll</HintPath>
     </Reference>
-    <Reference Include="MaxCustomControls">
-      <HintPath>..\lib\MaxCustomControls.dll</HintPath>
+    <Reference Include="MaxCustomControls, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib_2015\MaxCustomControls.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SceneExplorer">
-      <HintPath>..\lib\SceneExplorer.dll</HintPath>
+    <Reference Include="SceneExplorer, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib_2015\SceneExplorer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,7 +70,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UiViewModels">
-      <HintPath>..\lib\UiViewModels.dll</HintPath>
+      <HintPath>..\lib_2015\UiViewModels.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -98,7 +105,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="imgs\20\reset.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="imgs\20\load.png" />
   </ItemGroup>

@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AssemblyLoader</name>
+    </assembly>
+    <members>
+        <member name="T:AssemblyLoader.AssemblyLoaderResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:AssemblyLoader.AssemblyLoaderResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:AssemblyLoader.AssemblyLoaderResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:AssemblyLoader.AssemblyLoaderResources.ErrorMessage">
+             <summary>
+               Looks up a localized string similar to The assembly &quot;{0}&quot; encountered an error while loading.
+            
+            It is possible that this error put the application in a bad state. The application will continue to run, but we recommend quitting the application, removing the plug-in, and restarting.
+            
+            File: {1}
+            Full Error: {2}.
+             </summary>
+        </member>
+        <member name="P:AssemblyLoader.AssemblyLoaderResources.ErrorTitle">
+            <summary>
+              Looks up a localized string similar to Plug-in Assembly Load Error.
+            </summary>
+        </member>
+        <member name="T:AssemblyLoader.Loader">
+            <summary>
+            Loads managed assembly plug-ins.
+            </summary>
+            <remarks>
+            <para>
+            Loads plug-ins from a given directory (currently, the main executable
+            passes in bin/assemblies under the max program folder).  Each plug-in is
+            given a chance to execute some initialization code in order to add 
+            functionality to the program.  The assembly loading process happens in
+            four phases:
+            <list type="number">
+            <item>
+            	All assemblies in the given directory and its subdirectories are
+            	loaded into memory.
+            </item>
+            <item>
+            	The Loader executes the first entry point method that it finds in
+            	each assembly.  To be found. this method must exist on a public type 
+            	and must match one of the following two signatures:
+            	<list type="bullet">
+            		<item><c>public static void AssemblyMain()</c></item>
+            		<item><c>public static void AssemblyMain(AssemblyLoader.Loader loader)</c></item>
+            	</list>
+            	This second form is passed the current executing AssemblyLoader.Loader
+            	object. Usually, a plug-in would use this form if it needs to examine
+            	types from other plug-ins during the next loading phase.
+            </item>
+            <item>
+            	The Loader examines every publicly exported type from each loaded
+            	assembly plug-in, and passes each type in turn to its TypeLoaded 
+            	event handlers.
+            </item>
+            <item>
+            	Finally, the Loader executes the first clean up method that it finds
+            	in each assembly.  As with AssemblyMain, this method must exist on
+            	a public type and must match one of the following two signatures for the
+            	Loader to recognize it:
+            	<list type="bullet">
+            		<item><c>public static void AssemblyInitializationCleanup()</c></item>
+            		<item><c>
+            			public static void AssemblyInitializationCleanup(AssemblyLoader.Loader loader)
+            		</c></item>
+            	</list>
+            	Note that it is not necessary to remove TypeLoaded event handlers. These
+            	are cleared automatically at the end of the clean up phase.
+            </item>
+            </list>
+            </para>
+            <para>
+            When the application shuts down, the Loader runs over all loaded assembly
+            plug-ins and calls a shutdown method.  For the Loader to recognize the
+            method, the method must exist in a public type, and it must match
+            one of the following two signatures:
+            <list type="bullet">
+            <item><c>public static void AssemblyShutdown()</c></item>
+            <item><c>public static void AssemblyShutdown(AssemblyLoader.Loader loader)</c></item>
+            </list>
+            Plug-ins typically use this shutdown method to release any native resources
+            and to delete any remaining native objects. 
+            </para>
+            <para>
+            Each hook indicated above is entirely optional. The plug-in designer may
+            choose to use none, any, or all of these hooks: the AssemblyMain method, 
+            TypeLoaded event handlers, the AssemblyInitializationCleanup method, or
+            the AssemblyShutdown method.
+            </para>
+            <para>
+            It is important that mixed native and managed assemblies avoid native global
+            objects, that is objects allocated during DLL load, and released only during
+            DLL shutdown. This includes every type other than basic primitives or
+            arrays of primitives. Any actual object (class or struct) would have a 
+            constructor or destructor, even if it is generated by the compiler, and
+            executing the constructor at load time or the destructor during 
+            application termination may cause the execution of managed code outside
+            the CLR's lifetime. This can cause the application to crash, or to enter
+            a deadlock.
+            </para>
+            <para>
+            Instead of global objects, plug-ins should use dynamically allocated objects
+            explicitly constructed during AssemblyMain, and explicitly destructed during
+            AssemblyShutdown.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:AssemblyLoader.Loader.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:AssemblyLoader.Loader.LoadAssemblies(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Load all assemblies in the given path or any of its subdirectories.
+            </summary>
+            <remarks>
+            See the <see cref="T:AssemblyLoader.Loader"/> class documentation for more information
+            on the assembly load process.
+            </remarks>
+            <param name="directoryPath">
+            The path under which to look for assemblies.
+            </param>
+            <param name="search_pattern">
+            The pattern of files to search for
+            </param>
+            <param name="currentDirectory">
+            If a valid directory is used, the directory will be set as current directory which is used to search dependency Dlls.
+            Otherwise, 3ds Max's root directory will be set as current directory.
+            </param>
+            <param name="load_file_first">
+            If not null, specifies a file that should be loaded before all others (if the file is actually found on disk though).
+            </param>
+            <param name="call_init_method">
+            Pass in true to call the initialization methods on the assemblies that are found, false otherwise.
+            When loading maxscript assemblies for instance, it is necessary to pass in false to this method.
+            </param>
+        </member>
+        <member name="M:AssemblyLoader.Loader.CallInitMethods">
+            <summary>
+            Calls the assembly initialization methods. In some cases like maxscript, 
+            these have to be done later, after the assembly has been loaded.
+            </summary>
+        </member>
+        <member name="M:AssemblyLoader.Loader.ShutDownAssemblies">
+            <summary>
+            Call AssemblyShutdown over all loaded assemblies.
+            </summary>
+        </member>
+        <member name="F:AssemblyLoader.Loader.AssemblyList">
+            <summary>
+            Contains all the assemblies that are loaded.
+            The key is a string pointing to the full path of the assembly that was loaded. All keys for the
+            file path were generated by the method Directory.GetFiles. Hence they should all be normalized, consistent
+            and comparable between different calls to Directory.GetFiles.
+            The Values is an Assembly instance.
+            </summary>
+        </member>
+        <member name="F:AssemblyLoader.Loader.InitializedList">
+            <summary>
+            Contains all the initialized assemblies.
+            This is used to make sure one loaded assembly only get initialized once.
+            </summary>
+        </member>
+        <member name="M:AssemblyLoader.Loader.LoadAssembliesFromPath(System.String,System.String,System.String)">
+            <summary>
+            This function can get called two times. 
+            The first time for all *.dll files in bin/assemblies.
+            The second time (much later) for *.dlx files in bin/assemblies.
+            Therefore this function must make sure that nothing gets loaded more than once. 
+            </summary>
+            <param name="directoryPath">The directory to search in</param>
+            <param name="search_pattern">A pattern listing what types of files to search for. This doesn't have to be a wild-card pattern.</param>
+            <param name="load_file_first">If not null, specifies a file that should be loaded before all others (if the file is actually found on disk though).</param>
+        </member>
+        <member name="M:AssemblyLoader.Loader.LoadAssembly(System.String)">
+            <summary>
+            Takes care of the actual loading of the assembly.
+            </summary>
+            <param name="file">The full path to file</param>
+        </member>
+        <member name="F:AssemblyLoader.Loader.AssemblyPattern">
+            <summary>
+            Searches for managed .dll files
+            </summary>
+        </member>
+        <member name="F:AssemblyLoader.Loader.MaxscriptAssemblyPattern">
+            <summary>
+            Searches for managed maxscript .dlx files
+            </summary>
+        </member>
+        <member name="P:AssemblyLoader.Loader.ShowMessageOnError">
+            <summary>
+            Controls whether the Loader shows an error message to the user when
+            an error occurs while loading an assembly.
+            </summary>
+            <remarks>
+            The default value is <c>true</c>.
+            </remarks>
+        </member>
+        <member name="P:AssemblyLoader.Loader.ThrowExceptionOnError">
+            <summary>
+            Controls whether the Loader throws an exception when an error occurs
+            while loading an assembly.
+            </summary>
+            <remarks>
+            The default value is <c>false</c>.
+            </remarks>
+        </member>
+        <member name="E:AssemblyLoader.Loader.TypeLoaded">
+            <summary>
+            Occurs during assembly loading, as each publicly exported type from
+            each loaded assembly plug-in is examined.
+            </summary>
+        </member>
+        <member name="T:AssemblyLoader.TypeLoadedEventArgs">
+            <summary>
+            EventArgs with information about a Type loaded from a plug-in.
+            </summary>
+        </member>
+        <member name="M:AssemblyLoader.TypeLoadedEventArgs.#ctor(System.Type)">
+            <summary>
+            Construct with the current loaded type.
+            </summary>
+            <param name="type">The loaded type.</param>
+        </member>
+        <member name="P:AssemblyLoader.TypeLoadedEventArgs.LoadedType">
+            <summary>
+            The current loaded type.
+            </summary>
+        </member>
+    </members>
+</doc>

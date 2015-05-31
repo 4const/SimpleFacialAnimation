@@ -35,6 +35,8 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.compileBtn = new System.Windows.Forms.ToolStripButton();
             this.playBtn = new System.Windows.Forms.ToolStripButton();
+            this.resetBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -89,8 +91,10 @@
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Right;
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
             this.compileBtn,
-            this.playBtn});
+            this.playBtn,
+            this.resetBtn});
             this.toolStrip2.Location = new System.Drawing.Point(404, 27);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -118,6 +122,29 @@
             this.playBtn.Name = "playBtn";
             this.playBtn.Size = new System.Drawing.Size(34, 24);
             this.playBtn.ToolTipText = "Проиграть анимацию";
+            this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
+            // 
+            // resetBtn
+            // 
+            this.resetBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.resetBtn.Image = global::SimpleFacialAnimation.Properties.Resources.reset;
+            this.resetBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.resetBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.resetBtn.Name = "resetBtn";
+            this.resetBtn.Size = new System.Drawing.Size(34, 24);
+            this.resetBtn.ToolTipText = "Сбросить ";
+            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::SimpleFacialAnimation.Properties.Resources.reload;
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(34, 24);
+            this.toolStripButton1.ToolTipText = "Обработать скрипт";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // SimpleFacialAnimationForm
             // 
@@ -150,6 +177,8 @@
         private System.Windows.Forms.ToolStripButton loadBtn;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton compileBtn;
+        private System.Windows.Forms.ToolStripButton resetBtn;
         private System.Windows.Forms.ToolStripButton playBtn;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
