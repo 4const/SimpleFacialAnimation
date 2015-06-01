@@ -57,25 +57,39 @@ namespace SimpleFacialAnimation
             itf.SetTime(0, true);
             itf.EndAnimPlayback();
 
-            var interval = itf.AnimRange;       
             foreach (var control in Controls.Values)
             {
                 var node = itf.GetINodeByName(control.NodeName);
                 var centerNode = itf.GetINodeByName(control.CenterNodeName);
-                node.SetNodeTM(0, centerNode.GetNodeTM(0, null));                             
+                node.SetNodeTM(0, centerNode.GetNodeTM(0, null)); 
+                
+                ClearKeys(node);
             }
         }
 
-        public static void TestFuck()
+        private static void ClearKeys(IINode node)
         {
-            var global = GlobalInterface.Instance;
-            var itf = global.COREInterface;
+            Action<IControl> deleteKeys = c =>
+            {
+                IAnimatable a = null;
+                for (var i = 0; a == null; i++)
+                {
+                    var sub = c.SubAnim(i); 
+                    if (sub == null) break;
+                    if (c.SubAnimName(i) == "Animation") a = sub;
+                }
 
-            itf.SetTime(0, true);
-            itf.EndAnimPlayback();
-            var node = itf.GetINodeByName("S001");
-            node.TMController.PositionController.GetInterface(InterfaceID.Keycontrol);
-            itf.SelectNode(node, true);
+                while (a != null && a.NumKeys > 0) a.DeleteKeyByIndex(0);
+            };
+
+            var posControl = node.TMController.PositionController;
+            var rotControl = node.TMController.RotationController;
+            var sclControl = node.TMController.ScaleController;
+
+
+            deleteKeys(posControl);
+            deleteKeys(rotControl);
+            deleteKeys(sclControl);
         }
 
         private class FacialControl
