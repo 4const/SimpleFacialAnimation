@@ -30,35 +30,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AssemblyLoader, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AssemblyLoader, Version=17.3.374.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib_2015\AssemblyLoader.dll</HintPath>
+      <HintPath>..\lib\AssemblyLoader.dll</HintPath>
     </Reference>
-    <Reference Include="Autodesk.Max, Version=16.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Autodesk.Max, Version=17.3.374.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib_2015\Autodesk.Max.dll</HintPath>
+      <HintPath>..\lib\Autodesk.Max.dll</HintPath>
     </Reference>
-    <Reference Include="CSharpUtilities, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CSharpUtilities, Version=17.3.374.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib_2015\CSharpUtilities.dll</HintPath>
+      <HintPath>..\lib\CSharpUtilities.dll</HintPath>
     </Reference>
-    <Reference Include="ExplorerFramework, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ExplorerFramework, Version=17.3.374.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib_2015\ExplorerFramework.dll</HintPath>
+      <HintPath>..\lib\ExplorerFramework.dll</HintPath>
     </Reference>
     <Reference Include="ManagedServices, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib_2015\ManagedServices.dll</HintPath>
+      <HintPath>..\lib\ManagedServices.dll</HintPath>
     </Reference>
-    <Reference Include="MaxCustomControls, Version=16.0.420.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MaxCustomControls, Version=17.3.374.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib_2015\MaxCustomControls.dll</HintPath>
+      <HintPath>..\lib\MaxCustomControls.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SceneExplorer, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib_2015\SceneExplorer.dll</HintPath>
+      <HintPath>..\lib\SceneExplorer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,8 +69,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UiViewModels">
-      <HintPath>..\lib_2015\UiViewModels.dll</HintPath>
+    <Reference Include="UiViewModels, Version=17.3.374.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\UiViewModels.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
