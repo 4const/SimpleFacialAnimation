@@ -21,6 +21,7 @@ namespace SimpleFacialAnimation
                 throw new SfaException("Пересечение интервалов перемещения объекта: " + movement.ObjectId);
             }
             Movements.Add(movement);
+            Movements.Sort((l, r) => l.Start.CompareTo(r.Start));
         }
 
         public void AddExpressionUsage(ExpressionUsage usage)
