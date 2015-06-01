@@ -25,6 +25,15 @@ namespace SimpleFacialAnimation
             { "r_lipangle", new FacialControl("Body_BFMG1p_MOUTH_R_cc", "Body_BFMG2p_MOUTH_R_cc") }
         };
 
+        public static void ApplyTimeline(Timeline timeline)
+        {
+            ResetModel();
+            foreach (var mov in timeline.Movements)
+            {
+                
+            }
+        }
+
         public static bool HasIntersection(IEnumerable<Movement> movements, Movement movement)
         {
             Predicate<Movement> hasSame = m => m.ObjectId == movement.ObjectId &&

@@ -21,7 +21,7 @@ namespace SimpleFacialAnimation
         private void compileBtn_Click(object sender, EventArgs e)
         {
             var timeline = TimelineParser.Parse(xmlTextBox.Text);
-            var u = 0;
+            TimelineUtils.ApplyTimeline(timeline);
         }
 
         private void loadBtn_Click(object sender, EventArgs e)

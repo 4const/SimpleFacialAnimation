@@ -73,7 +73,7 @@ namespace SimpleFacialAnimation
             var id = movementNode.Attribute("id").Value;
             var start = int.Parse(movementNode.Attribute("start").Value);
             var end = int.Parse(movementNode.Attribute("end").Value);
-            var value = float.Parse(movementNode.Attribute("value").Value);
+            var value = movementNode.Attribute("value").Value;
 
             if (start >= end)
             {
