@@ -33,6 +33,8 @@ namespace SimpleFacialAnimation
             };
             dlg.ShowDialog();
 
+            if (dlg.FileName == null && dlg.FileName != "") return;
+
             using (var reader = new StreamReader(dlg.OpenFile(), Encoding.UTF8))
             {
                 xmlTextBox.Text = reader.ReadToEnd();                
@@ -48,6 +50,7 @@ namespace SimpleFacialAnimation
             };
             dlg.ShowDialog();
 
+            if (dlg.FileName == null && dlg.FileName != "") return;
             using (var writer = new StreamWriter(dlg.OpenFile(), Encoding.UTF8))
             {
                 writer.WriteLine(xmlTextBox.Text);

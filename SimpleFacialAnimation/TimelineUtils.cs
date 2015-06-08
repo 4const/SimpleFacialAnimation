@@ -33,56 +33,90 @@ namespace SimpleFacialAnimation
         
         public static void ApplyTimeline(Timeline timeline)
         {
-            ResetModel();
+//            ResetModel();
            
             Core.AnimRange = Global.Interval.Create(0, Time(timeline.Movements.Max(m => m.End)));
+
             foreach (var mov in timeline.Movements)
             {
                 var facialControl = Controls[mov.ObjectId];
                 var node = Core.GetINodeByName(facialControl.NodeName);
-                var centerPosition = Core.GetINodeByName(facialControl.CenterNodeName).GetNodeTM(0, null).Trans;
+                var centerPosition = ExtractNodePosition(Core.GetINodeByName(facialControl.CenterNodeName), 0);
 
                 var startTime = Time(mov.Start);
                 var endTime = Time(mov.End);
 
                 Core.SetTime(startTime, false);
-
-                var posController = node.TMController.PositionController;
-                var animation = SelectAnimationLayer(posController);
-
-                var keys = (IIKeyControl) posController.GetInterface(InterfaceID.Keycontrol);
                 
-                var startKey = Global.ITCBPoint3Key.Create();                
-                var existedStartKeyIndex = animation.GetKeyIndex(startTime);
-                if (existedStartKeyIndex != -1)
+                var animation = (IControl) SelectAnimationLayer(node.TMController.PositionController);
+
+                var posControl = animation.XController;
+
+                var xKeys = (IIKeyControl) animation.XController.GetInterface(InterfaceID.Keycontrol);
+                var yKeys = (IIKeyControl) animation.YController.GetInterface(InterfaceID.Keycontrol);
+                var zKeys = (IIKeyControl) animation.ZController.GetInterface(InterfaceID.Keycontrol);
+
+                var x_0 = CreatePoint4Key();
+                var x_1 = CreatePoint4Key();
+                xKeys.GetKey(0, x_0);
+                xKeys.GetKey(1, x_1);
+
+                var y_0 = CreatePoint4Key();
+                var y_1 = CreatePoint4Key();
+                yKeys.GetKey(0, y_0);
+                yKeys.GetKey(1, y_1);
+
+                var z_0 = CreatePoint4Key();
+                var z_1 = CreatePoint4Key();
+                zKeys.GetKey(0, z_0);
+                zKeys.GetKey(1, z_1);
+
+                ResetModel();
+
+                var existedStartKeyIndex = posControl.GetKeyIndex(startTime);
+                if (existedStartKeyIndex == -1)
                 {
-                    keys.GetKey(existedStartKeyIndex, startKey);
-                }
-                else
-                {
-                    keys.AppendKey(startKey);
+                    var startXKey = CreatePoint4Key();
+                    var startYKey = CreatePoint4Key();
+                    var startZKey = CreatePoint4Key();
+                    
+                    startXKey.Time = startTime;
+                    startYKey.Time = startTime;
+                    startZKey.Time = startTime;
+
+                    var position = ExtractNodePosition(node, startTime);
+                    startXKey.Val = x_0.Val;
+                    startXKey.Val.W = position.Item1;
+                    startYKey.Val = y_0.Val;
+                    startYKey.Val.W = position.Item2;
+                    startZKey.Val = z_0.Val;
+                    startZKey.Val.W = position.Item3;
+
+                    xKeys.AppendKey(startXKey);
+                    yKeys.AppendKey(startYKey);
+                    zKeys.AppendKey(startZKey);
                 }
                 
-                startKey.Time = startTime;
-                startKey.Val = node.GetNodeTM(startTime, null).Trans;
-
                 Core.SetTime(endTime, false);
 
-                var endKey = Global.ITCBPoint3Key.Create();
-                var existedEndKeyIndex = animation.GetKeyIndex(startTime);
-                if (existedEndKeyIndex != -1)
-                {
-                    keys.GetKey(existedStartKeyIndex, endKey);
-                }
-                else
-                {
-                    keys.AppendKey(endKey);
-                }
+                var endXKey = CreatePoint4Key();
+                var endYKey = CreatePoint4Key();
+                var endZKey = CreatePoint4Key();
+                
+                endXKey.Time = endTime;
+                endYKey.Time = endTime;
+                endZKey.Time = endTime;
 
-                endKey.Time = endTime;
-                var endPosition = Global.Point3.Create(centerPosition);
-                endPosition.Z += float.Parse(mov.Value) * 0.01f;
-                endKey.Val = endPosition;
+                endXKey.Val = x_0.Val;
+                endXKey.Val.W = centerPosition.Item1;
+                endYKey.Val = y_0.Val;
+                endYKey.Val.W = centerPosition.Item2;
+                endZKey.Val = z_0.Val;
+                endZKey.Val.W = centerPosition.Item3 - 5f;
+
+                xKeys.AppendKey(endXKey);
+                yKeys.AppendKey(endYKey);
+                zKeys.AppendKey(endZKey);
             }
             
             Core.SetTime(0, true);
@@ -160,6 +194,34 @@ namespace SimpleFacialAnimation
             deleteKeys(posControl);
             deleteKeys(rotControl);
             deleteKeys(sclControl);
+        }
+
+        private static IIBezFloatKey CreateBezFloatKey()
+        {
+            var key = Global.IBezFloatKey.Create();
+            key.Intan = key.Outtan = 0;
+            key.InLength = 1;
+            key.OutLength = -1;
+
+            key.Flags = 0x00001B00;
+
+            return key;
+        }
+        private static IIBezPoint4Key CreatePoint4Key()
+        {
+            var key = Global.IBezPoint4Key.Create();
+            
+            return key;
+        }
+
+        private static Tuple<float, float, float> ExtractNodePosition(IINode node, int time)
+        {
+            var tm = node.GetNodeTM(time, null);
+            var x = tm.GetColumn(0).W;
+            var y = tm.GetColumn(1).W;
+            var z = tm.GetColumn(2).W;
+
+            return Tuple.Create(x, y, z);
         }
 
         private class FacialControl
